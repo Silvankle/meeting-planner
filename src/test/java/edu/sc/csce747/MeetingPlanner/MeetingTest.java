@@ -118,4 +118,17 @@ public class MeetingTest {
         assertEquals(1, m.getAttendees().size());
         assertEquals("bob", m.getAttendees().get(0).getName());
     }
+
+     /**
+     * [getAttendees exposure]
+     * getAttendees() нь дотоод жагсаалтыг шууд буцаадаг (modifiable).
+     * Энэ бол одоогийн загварын нэг ШИНЖ — гаднаас өөрчлөхөд хэмжээ нэмэгдэж буйг батална.
+     * (Хэрвээ энэхүү үйлдлийг өөрчлөх бол буцаахдаа хамгаалалттай хуулбар өгөхийг бодолцоно.)
+     */
+    @Test
+    public void getAttendees_returnsBackedList_currentBehavior() {
+        Meeting m = mk(9, 9, 14, 15, room, alice, "Review");
+        m.getAttendees().add(bob); // гаднаас шууд өөрчилж байна
+        assertEquals(2, m.getAttendees().size());
+    }
 }
