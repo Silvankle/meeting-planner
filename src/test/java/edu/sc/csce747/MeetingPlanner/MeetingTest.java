@@ -60,4 +60,18 @@ public class MeetingTest {
         assertEquals(23, h.getEndTime());
         assertNull("Description can be null in this ctor", h.getDescription());
     }
+
+    /**
+     * [Constructor: all-day (month, day, description)]
+     * Бүтэн өдөр + тайлбар өгөх үед start=0, end=23, description тохирно.
+     */
+    @Test
+    public void ctor_allDay_withDescription_setsFields() {
+        Meeting h = new Meeting(12, 1, "Holiday");
+        assertEquals(12, h.getMonth());
+        assertEquals(1,  h.getDay());
+        assertEquals(0,  h.getStartTime());
+        assertEquals(23, h.getEndTime());
+        assertEquals("Holiday", h.getDescription());
+    }
 }
