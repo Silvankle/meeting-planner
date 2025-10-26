@@ -1,0 +1,32 @@
+# --- Maven ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# --- Java ---
+*.class
+*.log
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iml
+
+# --- Eclipse ---
+.project
+.classpath
+.settings/
+
+# --- VS Code ---
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Reports / coverage (хэрэгцээгүй бол) ---
+surefire-reports/
+failsafe-reports/
+jacoco.exec
+target/site/
