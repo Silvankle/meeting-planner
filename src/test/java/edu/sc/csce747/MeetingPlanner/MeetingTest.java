@@ -131,4 +131,32 @@ public class MeetingTest {
         m.getAttendees().add(bob); // гаднаас шууд өөрчилж байна
         assertEquals(2, m.getAttendees().size());
     }
+    // ----------------------------------------------------------------------
+    // 3) Setter/Getter-үүд
+    // ----------------------------------------------------------------------
+
+    /**
+     * [Setters]
+     * setMonth/setDay/setStartTime/setEndTime/setRoom/setDescription нь төлөвийг шинэчилнэ.
+     * (Валидаци Meeting ангид байхгүй — Calendar дээр хийдэг.)
+     */
+    @Test
+    public void setters_shouldUpdateState() {
+        Meeting m = mk(3, 10, 9, 10, room, alice, "A");
+        Room r2 = new Room("R2");
+
+        m.setMonth(4);
+        m.setDay(11);
+        m.setStartTime(12);
+        m.setEndTime(13);
+        m.setRoom(r2);
+        m.setDescription("Updated");
+
+        assertEquals(4, m.getMonth());
+        assertEquals(11, m.getDay());
+        assertEquals(12, m.getStartTime());
+        assertEquals(13, m.getEndTime());
+        assertSame(r2, m.getRoom());
+        assertEquals("Updated", m.getDescription());
+    }
 }
