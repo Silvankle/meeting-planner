@@ -1,18 +1,8 @@
-# Unit Test Report
+# Unit Testing Report
 
-**Date:** YYYY-MM-DD  
-**Env:** JDK 17, JUnit 4.13.2, Ant
-
-## Summary
-- Total tests: X
-- Failures: Y
-- Errors: Z
-- Skipped: K
-- Javadoc: `build/site/apidocs/index.html`
-
-## What I Tested
-- Calendar: invalid month/day, start==end, double booking, index bounds
-- Room/Person/Organization: basic invariants
-
-## Bugs Found & Fixes
-1) ...
+## Raw lines
+Tests run: 31, Failures: 6, Errors: 2, Skipped: 0, Time elapsed: 0.089 sec
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.008 sec
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.007 sec
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.009 sec
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.009 sec
