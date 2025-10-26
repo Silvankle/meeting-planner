@@ -189,4 +189,15 @@ public class MeetingTest {
         assertTrue(s.contains("Attending: alice,bob"));
         assertFalse("Should not end with comma", s.trim().endsWith(","));
     }
+        /**
+     * [FAIL] room == null үед toString() дотор room.getID() → NullPointerException.
+     */
+    @Test
+    public void toString_shouldHandleNullRoom_withoutNPE() {
+        ArrayList<Person> at = new ArrayList<>();
+        at.add(alice);
+        Meeting m = new Meeting(8, 3, 9, 10, at, null, "Sync");
+        String s = m.toString();             // Одоогоор NullPointerException (FAIL)
+        assertTrue(s.contains("Sync"));
+    }
 }
