@@ -74,4 +74,24 @@ public class MeetingTest {
         assertEquals(23, h.getEndTime());
         assertEquals("Holiday", h.getDescription());
     }
+
+    /**
+     * [Constructor: timed + attendees + room + description]
+     * Талбарууд яг дамжуулсан утгаар хадгалагдаж буйг шалгана.
+     */
+    @Test
+    public void ctor_timed_setsAllFields() {
+        ArrayList<Person> at = new ArrayList<>();
+        at.add(alice);
+        Meeting m = new Meeting(7, 1, 10, 11, at, room, "Standup");
+
+        assertEquals(7,  m.getMonth());
+        assertEquals(1,  m.getDay());
+        assertEquals(10, m.getStartTime());
+        assertEquals(11, m.getEndTime());
+        assertEquals("Standup", m.getDescription());
+        assertSame(room, m.getRoom());
+        assertEquals(1, m.getAttendees().size());
+        assertEquals("alice", m.getAttendees().get(0).getName());
+    }
 }
