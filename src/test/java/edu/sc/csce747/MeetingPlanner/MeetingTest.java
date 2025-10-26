@@ -94,4 +94,28 @@ public class MeetingTest {
         assertEquals(1, m.getAttendees().size());
         assertEquals("alice", m.getAttendees().get(0).getName());
     }
+
+    // ----------------------------------------------------------------------
+    // 2) Attendees удирдлага
+    // ----------------------------------------------------------------------
+
+    /**
+     * [addAttendee/removeAttendee]
+     * Нэмж, дараа нь нэгийг нь хасахад жагсаалтын хэмжээ зөв өөрчлөгдөх ёстой.
+     */
+    @Test
+    public void add_and_remove_attendee_updatesList() {
+        ArrayList<Person> at = new ArrayList<>();
+        at.add(alice);
+        Meeting m = new Meeting(8, 3, 9, 10, at, room, "Sync");
+
+        // add second attendee
+        m.addAttendee(bob);
+        assertEquals(2, m.getAttendees().size());
+
+        // remove one
+        m.removeAttendee(alice);
+        assertEquals(1, m.getAttendees().size());
+        assertEquals("bob", m.getAttendees().get(0).getName());
+    }
 }
