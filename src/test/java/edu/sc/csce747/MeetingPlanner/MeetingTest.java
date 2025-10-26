@@ -200,4 +200,15 @@ public class MeetingTest {
         String s = m.toString();             // Одоогоор NullPointerException (FAIL)
         assertTrue(s.contains("Sync"));
     }
+        /**
+     * [FAIL] all-day ctor (month, day, description) бас attendees == null.
+     * removeAttendee() → NPE болох ёсгүй.
+     */
+    @Test
+    public void removeAttendee_onAllDayCtor_shouldNotNPE() {
+        Meeting h = new Meeting(12, 1, "Holiday");
+        // хамгаалалттай байх ёстой — одоогоор NPE
+        h.removeAttendee(alice);              // Одоогоор NPE (FAIL)
+        assertNotNull(h.getAttendees());
+    }
 }
