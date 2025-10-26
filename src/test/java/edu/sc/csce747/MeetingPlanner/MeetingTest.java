@@ -159,4 +159,34 @@ public class MeetingTest {
         assertSame(r2, m.getRoom());
         assertEquals("Updated", m.getDescription());
     }
+    // ----------------------------------------------------------------------
+    // 4) toString() формат
+    // ----------------------------------------------------------------------
+
+    /**
+     * [toString формат шалгалт]
+     * Формат: "m/d, start - end,ROOM: desc\nAttending: name1,name2"
+     *  - сарын/өдрийн хэсэг орсон
+     *  - цагийн мэдээлэл орсон
+     *  - өрөөний ID ба тайлбар орсон
+     *  - Attending: жагсаалт төгсгөлд **таслалгүй** байна
+     */
+    @Test
+    public void toString_containsCoreFields_and_noTrailingComma() {
+        ArrayList<Person> at = new ArrayList<>();
+        at.add(alice);
+        at.add(bob);
+        Meeting m = new Meeting(10, 2, 15, 16, at, room, "Design");
+
+        String s = m.toString();
+        // month/day, time window
+        assertTrue(s.contains("10/2"));
+        assertTrue(s.contains("15 - 16"));
+        // room and description
+        assertTrue(s.contains("R1"));
+        assertTrue(s.contains("Design"));
+        // attendees listing
+        assertTrue(s.contains("Attending: alice,bob"));
+        assertFalse("Should not end with comma", s.trim().endsWith(","));
+    }
 }
