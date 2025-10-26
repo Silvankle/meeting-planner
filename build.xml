@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MeetingPlanner" default="test" basedir=".">
+  <property name="src.main" value="src/main/java"/>
+  <property name="src.test" value="src/test/java"/>
+  <property name="build.dir" value="build/classes"/>
+  <property name="reports.dir" value="build/reports"/>
+  <property name="javadoc.dir" value="build/site/apidocs"/>
+  <property name="lib.dir" value="lib"/>
+  <path id="cp">
+    <pathelement location="${build.dir}"/>
+    <fileset dir="${lib.dir}"><include name="*.jar"/></fileset>
+  </path>
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+    <delete dir="${reports.dir}"/>
+    <delete dir="${javadoc.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${reports.dir}"/>
+  </target>
+  <target name="compile" depends="clean">
+    <javac source="17" target="17" includeantruntime="false"
+           srcdir="${src.main}" destdir="${build.dir}" classpathref="cp"/>
+    <javac source="17" target="17" includeantruntime="false"
+           srcdir="${src.test}" destdir="${build.dir}" classpathref="cp"/>
+  </target>
+  <target name="javadoc">
+    <mkdir dir="${javadoc.dir}"/>
+    <javadoc destdir="${javadoc.dir}" sourcepath="${src.main}" classpathref="cp"
+             use="true" author="true" version="true" windowtitle="MeetingPlanner API">
+      <doctitle>MeetingPlanner API</doctitle>
+    </javadoc>
+  </target>
+  <target name="test" depends="compile">
+    <mkdir dir="${reports.dir}"/>
+    <junit printsummary="on" haltonfailure="false" fork="true">
+      <classpath><path refid="cp"/></classpath>
+      <formatter type="plain"/>
+      <batchtest todir="${reports.dir}">
+        <fileset dir="${src.test}"><include name="**/*Test.java"/></fileset>
+      </batchtest>
+    </junit>
+  </target>
+</project>
