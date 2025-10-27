@@ -88,5 +88,9 @@ public class PersonTest {
         alice.addMeeting(mk(7, 5, 9, 12, "A"));
         alice.addMeeting(mk(7, 5, 10, 11, "B")); // давхцал
     }
-    
+    /** Хүчингүй огноо: 2/30 → Exception. */
+    @Test(expected = TimeConflictException.class)
+    public void addMeeting_invalidDate_feb30_shouldThrow() throws Exception {
+        alice.addMeeting(mk(2, 30, 9, 10, "Nope"));
+    }
 }
