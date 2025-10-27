@@ -86,8 +86,8 @@ public class OrganizationTest {
         org.getEmployee("NO_SUCH_PERSON");
     }
     /**
-     * [Quality] Ижил ID-тай өрөө олонтоо байхгүй (жагсаалт дахь ID-ууд давхцахгүй байхыг зөөлөн шалгана).
-     *  - Энэ нь Organization инициализацид давхардсан ID үүсгээгүйг батлахын тулд.
+     * Ижил ID-тай өрөө олон байхгүй (жагсаалт дахь ID-ууд давхцахгүй байхыг шалгана).
+     *  - Энэ нь Organization  давхардсан ID үүсгээгүйг батлахын тулд.
      */
     @Test
     public void rooms_shouldNotContainDuplicateIds_softCheck() {
@@ -95,6 +95,17 @@ public class OrganizationTest {
         java.util.Set<String> ids = new java.util.HashSet<>();
         for (Room r : rooms) {
             assertTrue("Room ID давхцаж болохгүй: " + r.getID(), ids.add(r.getID()));
+        }
+    }
+    /**
+     * Ажилтнуудын нэр давхцахгүй байвал сайн (зөөлөн шалгалт).
+     */
+    @Test
+    public void employees_shouldNotContainDuplicateNames_softCheck() {
+        List<Person> employees = org.getEmployees();
+        java.util.Set<String> names = new java.util.HashSet<>();
+        for (Person p : employees) {
+            assertTrue("Employee name давхцаж болохгүй: " + p.getName(), names.add(p.getName()));
         }
     }
 }
