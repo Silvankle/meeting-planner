@@ -74,4 +74,25 @@ public class RoomTest {
         assertEquals(9, got.getStartTime());
         assertEquals(10, got.getEndTime());
     }
+    // =========================================================
+    // 2) (EXCEPTION) — ЗӨВ УНАЛТ
+    // =========================================================
+
+    /** start > end үед TimeConflictException шидэх ёстой. */
+    @Test(expected = TimeConflictException.class)
+    public void addMeeting_startGreaterThanEnd_shouldThrow() throws Exception {
+        r1.addMeeting(mk(4, 10, 15, 10, "Bad interval"));
+    }
+
+    /** Хүчингүй цаг — start == -1 → Exception. */
+    @Test(expected = TimeConflictException.class)
+    public void addMeeting_illegalStartHour_shouldThrow() throws Exception {
+        r1.addMeeting(mk(4, 10, -1, 10, "Bad hour"));
+    }
+
+    /** Хүчингүй цаг — end == 24 → Exception. */
+    @Test(expected = TimeConflictException.class)
+    public void addMeeting_illegalEndHour_shouldThrow() throws Exception {
+        r1.addMeeting(mk(4, 10, 9, 24, "Bad hour"));
+    }
 }
