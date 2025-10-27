@@ -120,4 +120,21 @@ public class RoomTest {
     public void removeMeeting_outOfBounds_shouldThrow() {
         r1.removeMeeting(1, 1, 0);
     }
+    // =========================================================
+    // 3) FAIL — САНААТАЙ УНАГАХ (одоогийн Calendar сул талууд)
+    // =========================================================
+
+    /**
+     * [FAIL #1] “Агуулах” давхцал: isBusy(8–13) нь A(9–12)-ийг бүхэлд нь агуулах тул TRUE байх ёстой.
+     * Одоогийн Calendar.isBusy() query.start/end ∈ [A.start, A.end] шалгалтаар зөвхөн дотор орсон эсэхийг хардаг тул
+     * бүрэн агуулах (containment) тохиолдлыг алддаг магадлалтай.
+     * FIX: overlap нөхцөлийг max(s1,s2) <= min(e1,e2) болгон сайжруулах.
+     */
+    @Test
+    public void isBusy_containingInterval_shouldBeTrue_FAILING_BY_SPEC() throws Exception {
+        r1.addMeeting(mk(9, 10, 9, 12, "Big"));
+        assertTrue("8–13 нь 9–12-г бүхэлд нь агуулах тул busy=true байх ёстой",
+                r1.isBusy(9, 10, 8, 13)); // Одоогоор FAIL болох магадлал өндөр
+    }
+
 }
