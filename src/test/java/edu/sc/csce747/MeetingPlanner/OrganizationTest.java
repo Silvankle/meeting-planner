@@ -65,7 +65,7 @@ public class OrganizationTest {
     // b) (Exception хаях ёстой нөхцөл)
     // --------------------------------------------
     /**
-     * [Сөрөг, try/catch + fail()] Байхгүй өрөөний алдааны мессежийг мөн шалгана.
+     * [Сөрөг, try/catch + fail()] Хоосон өрөөний алдааны мессежийг мөн шалгана.
      *  - Зөв FAIL болж байгаа эсэх (алдааны төрөл/мессеж) баталгаажна.
      */
     @Test
@@ -79,5 +79,10 @@ public class OrganizationTest {
                     e.getMessage().toLowerCase().contains("room") &&
                     e.getMessage().toLowerCase().contains("does not exist"));
         }
+    }
+    /** [Сөрөг, @Test(expected)] Байхгүй ажилтан авбал Exception. */
+    @Test(expected = Exception.class)
+    public void getEmployee_unknown_shouldThrow_exceptionAnnotated() throws Exception {
+        org.getEmployee("NO_SUCH_PERSON");
     }
 }
