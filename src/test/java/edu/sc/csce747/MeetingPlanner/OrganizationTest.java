@@ -52,4 +52,13 @@ public class OrganizationTest {
         Room r = org.getRoom("2A03");
         assertEquals("2A03", r.getID());
     }
+    /**
+     * Байгаа хүнийг нэрээр нь авч чадна (default нэрсийн нэгийг сонгоно).
+     *  - getEmployee("Greg Gay") нэр таарч буй Person буцах ёстой.
+     */
+    @Test
+    public void getEmployee_existingName_shouldReturnPerson() throws Exception {
+        Person p = org.getEmployee("Greg Gay");
+        assertEquals("Greg Gay", p.getName());
+    }
 }
