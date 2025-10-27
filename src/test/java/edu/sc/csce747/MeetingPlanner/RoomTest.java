@@ -95,4 +95,19 @@ public class RoomTest {
     public void addMeeting_illegalEndHour_shouldThrow() throws Exception {
         r1.addMeeting(mk(4, 10, 9, 24, "Bad hour"));
     }
+    /**
+     * Давхцал — ижил цонхонд хоёр уулзалт нэмэхэд Exception, мессеж нь өрөөний ID-тай хамт ирнэ.
+     * Room.addMeeting нь "Conflict for room R1:\n..." гэж боож шиддэгийг баталж байна.
+     */
+    @Test
+    public void doubleBooking_sameWindow_shouldThrow_withRoomMessage() {
+        try {
+            r1.addMeeting(mk(7, 5, 9, 12, "A"));
+            r1.addMeeting(mk(7, 5, 10, 11, "B")); // давхцал
+            fail("Expected TimeConflictException for overlapping bookings");
+        } catch (TimeConflictException e) {
+            assertNotNull(e.getMessage());
+            assertTrue(e.getMessage().contains("Conflict for room R1"));
+        }
+    }
 }
