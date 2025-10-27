@@ -76,4 +76,17 @@ public class PersonTest {
     public void addMeeting_illegalStartHour_shouldThrow() throws Exception {
         alice.addMeeting(mk(4, 10, -1, 10, "Bad hour"));
     }
+    /** Хүчингүй цаг: end==24 → Exception. */
+    @Test(expected = TimeConflictException.class)
+    public void addMeeting_illegalEndHour_shouldThrow() throws Exception {
+        alice.addMeeting(mk(4, 10, 9, 24, "Bad hour"));
+    }
+
+    /** Давхцал: ижил өдөр-цагт 2 уулзалт нэмэх оролдлого → Exception. */
+    @Test(expected = TimeConflictException.class)
+    public void doubleBooking_sameWindow_shouldThrow() throws Exception {
+        alice.addMeeting(mk(7, 5, 9, 12, "A"));
+        alice.addMeeting(mk(7, 5, 10, 11, "B")); // давхцал
+    }
+    
 }
