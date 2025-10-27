@@ -93,4 +93,21 @@ public class PersonTest {
     public void addMeeting_invalidDate_feb30_shouldThrow() throws Exception {
         alice.addMeeting(mk(2, 30, 9, 10, "Nope"));
     }
+     // =========================================================
+    // 3) FAIL — САНААТАЙ УНАГАХ (одоогийн Calendar сул талуудыг илрүүлэх)
+    // =========================================================
+
+    /**
+     * [FAIL #1] “Агуулах” давхцал: A(9–12) байхад isBusy(8–13) → true гэж үзнэ.
+     * Одоогийн Calendar.isBusy() зөвхөн query.start/end ∈ [A.start,A.end] шалгадаг тул
+     * бүрэн агуулах интервал (8–13)-ийг алдаж false буцаадаг магадлалтай.
+     * FIX: max(s1,s2) <= min(e1,e2) логик руу шилжих.
+     */
+    @Test
+    public void isBusy_containingInterval_shouldBeTrue_FAILING_BY_SPEC() throws Exception {
+        alice.addMeeting(mk(9, 10, 9, 12, "Big"));
+        assertTrue("8–13 нь 9–12-г бүхэлд нь агуулах тул busy=true байх ёстой",
+                alice.isBusy(9, 10, 8, 13)); // Одоогоор FAIL болох магадлал өндөр
+    }
+
 }
