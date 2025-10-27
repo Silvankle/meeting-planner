@@ -61,4 +61,23 @@ public class OrganizationTest {
         Person p = org.getEmployee("Greg Gay");
         assertEquals("Greg Gay", p.getName());
     }
+    // --------------------------------------------
+    // b) (Exception хаях ёстой нөхцөл)
+    // --------------------------------------------
+    /**
+     * [Сөрөг, try/catch + fail()] Байхгүй өрөөний алдааны мессежийг мөн шалгана.
+     *  - Зөв FAIL болж байгаа эсэх (алдааны төрөл/мессеж) баталгаажна.
+     */
+    @Test
+    public void getRoom_unknown_shouldThrow_withMessageCheck() {
+        try {
+            org.getRoom("XXX");
+            fail("Exception гарах ёстой: байхгүй өрөө");
+        } catch (Exception e) {
+            assertTrue("Мессеж нь 'room does not exist' агуулсан байх",
+                    e.getMessage() != null &&
+                    e.getMessage().toLowerCase().contains("room") &&
+                    e.getMessage().toLowerCase().contains("does not exist"));
+        }
+    }
 }
