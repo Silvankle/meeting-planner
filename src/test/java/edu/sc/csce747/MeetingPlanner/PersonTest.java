@@ -71,4 +71,9 @@ public class PersonTest {
                     || e.getMessage().toLowerCase().contains("before it ends"));
         }
     }
+    /** Хүчингүй цаг: start==-1 → Exception. */
+    @Test(expected = TimeConflictException.class)
+    public void addMeeting_illegalStartHour_shouldThrow() throws Exception {
+        alice.addMeeting(mk(4, 10, -1, 10, "Bad hour"));
+    }
 }
