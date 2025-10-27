@@ -85,4 +85,16 @@ public class OrganizationTest {
     public void getEmployee_unknown_shouldThrow_exceptionAnnotated() throws Exception {
         org.getEmployee("NO_SUCH_PERSON");
     }
+    /**
+     * [Quality] Ижил ID-тай өрөө олонтоо байхгүй (жагсаалт дахь ID-ууд давхцахгүй байхыг зөөлөн шалгана).
+     *  - Энэ нь Organization инициализацид давхардсан ID үүсгээгүйг батлахын тулд.
+     */
+    @Test
+    public void rooms_shouldNotContainDuplicateIds_softCheck() {
+        List<Room> rooms = org.getRooms();
+        java.util.Set<String> ids = new java.util.HashSet<>();
+        for (Room r : rooms) {
+            assertTrue("Room ID давхцаж болохгүй: " + r.getID(), ids.add(r.getID()));
+        }
+    }
 }
