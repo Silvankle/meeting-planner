@@ -110,4 +110,14 @@ public class RoomTest {
             assertTrue(e.getMessage().contains("Conflict for room R1"));
         }
     }
+    /** Индексийн хил — уулзалтгүй өдөр get/remove → IndexOutOfBoundsException. */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getMeeting_outOfBounds_shouldThrow() {
+        r1.getMeeting(1, 1, 0);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void removeMeeting_outOfBounds_shouldThrow() {
+        r1.removeMeeting(1, 1, 0);
+    }
 }
