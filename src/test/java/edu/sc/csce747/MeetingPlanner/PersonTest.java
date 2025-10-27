@@ -56,4 +56,19 @@ public class PersonTest {
         String text = alice.printAgenda(9, 9);
         assertTrue(text.contains("Review"));
     }
+    // =========================================================
+    // 2) (EXCEPTION) — ЗӨВ УНАЛТ
+    // =========================================================
+
+    /** start>end үед TimeConflictException шидэх ёстой (try/catch + fail() хэлбэр). */
+    @Test
+    public void addMeeting_startGreaterThanEnd_shouldThrow() {
+        try {
+            alice.addMeeting(mk(4, 10, 15, 10, "Bad interval"));
+            fail("Expected TimeConflictException when start > end");
+        } catch (TimeConflictException e) {
+            assertTrue(e.getMessage() == null
+                    || e.getMessage().toLowerCase().contains("before it ends"));
+        }
+    }
 }
