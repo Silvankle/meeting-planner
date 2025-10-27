@@ -32,7 +32,7 @@ public class OrganizationTest {
     // a) HAPPY PATH кейсүүд
     // -------------------------
 
-    /** [Эерэг] Инициализ болсон employees/rooms жагсаалтууд null биш, хоосон биш байх ёстой. */
+    /** Инициализ болсон employees/rooms жагсаалтууд null биш, хоосон биш байх ёстой. */
     @Test
     public void ctor_shouldInitializeEmployeesAndRooms() {
         List<Person> employees = org.getEmployees();
@@ -42,5 +42,14 @@ public class OrganizationTest {
         assertNotNull("rooms null байж болохгүй", rooms);
         assertFalse("employees хоосон биш байх ёстой", employees.isEmpty());
         assertFalse("rooms хоосон биш байх ёстой", rooms.isEmpty());
+    }
+    /**
+     *Байгаа өрөөг нэрээр нь авч чадна (default: 2A01..2A05).
+     *  - getRoom("2A03") буцаасан объектын ID яг таарах ёстой.
+     */
+    @Test
+    public void getRoom_existingId_shouldReturnRoom() throws Exception {
+        Room r = org.getRoom("2A03");
+        assertEquals("2A03", r.getID());
     }
 }
