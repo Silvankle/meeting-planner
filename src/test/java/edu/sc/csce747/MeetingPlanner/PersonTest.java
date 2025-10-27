@@ -109,5 +109,10 @@ public class PersonTest {
         assertTrue("8–13 нь 9–12-г бүхэлд нь агуулах тул busy=true байх ёстой",
                 alice.isBusy(9, 10, 8, 13)); // Одоогоор FAIL болох магадлал өндөр
     }
-
+    // (Хэрэв бодлогын хувьд 0 минутын уулзалтыг зөвшөөрмөөр байвал — FAIL тест нэмэлт
+    @Test
+    public void zeroDuration_shouldBeAllowed_byPolicy_FAILING_BY_SPEC() throws Exception {
+        alice.addMeeting(mk(5, 20, 10, 10, "Zero"));
+        assertTrue(alice.isBusy(5, 20, 10, 10));
+    }
 }
