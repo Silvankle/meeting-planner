@@ -48,4 +48,12 @@ public class PersonTest {
         assertTrue("10–11 хооронд завгүй байх ёстой", alice.isBusy(6, 20, 10, 11));
         assertFalse("11–12 хооронд завтай байх ёстой", alice.isBusy(6, 20, 11, 12));
     }
+
+    /** printAgenda(month, day) — агуулах текстийг шалгах. */
+    @Test
+    public void printAgenda_shouldContainMeetingDescription() throws Exception {
+        alice.addMeeting(mk(9, 9, 14, 15, "Review"));
+        String text = alice.printAgenda(9, 9);
+        assertTrue(text.contains("Review"));
+    }
 }
