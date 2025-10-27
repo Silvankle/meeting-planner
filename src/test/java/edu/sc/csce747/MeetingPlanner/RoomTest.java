@@ -136,5 +136,15 @@ public class RoomTest {
         assertTrue("8–13 нь 9–12-г бүхэлд нь агуулах тул busy=true байх ёстой",
                 r1.isBusy(9, 10, 8, 13)); // Одоогоор FAIL болох магадлал өндөр
     }
+    /**
+     * [FAIL #2] 12-р сар хүчинтэй (1..12). Calendar.checkTimes() дотор mMonth >= 12 гэж буруу хориглож байвал
+     * 12-р сарын уулзалт нэмэх оролдлого Exception шидэж FAIL болно.
+     * FIX: mMonth > 12 гэж шалгахаар засах.
+     */
+    @Test
+    public void month12_shouldBeValidToAddMeeting_FAILING_BY_SPEC() throws Exception {
+        r1.addMeeting(mk(12, 1, 9, 10, "December OK")); // Одоогийн код дээр Exception байж магадгүй
+        assertTrue(r1.isBusy(12, 1, 9, 10));
+    }
 
 }
